@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaDatabaseConsumer {
 
+
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaDatabaseConsumer.class);
 
     private WikimediaDataRepository dataRepository;
@@ -19,8 +20,8 @@ public class KafkaDatabaseConsumer {
     }
 
     @KafkaListener(
-            topics = "wikimedia_recentchange",
-            groupId = "myGroup"
+            topics = "${spring.kafka.topic.name}",
+            groupId = "${spring.kafka.consumer.group-id}"
     )
     public void consume(String eventMessage){
 
